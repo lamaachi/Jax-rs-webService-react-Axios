@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import {port} from "../Variables/localhost";
 const CreateProduct = () => {
     // Définir l'état initial pour le nouveau produit
     const initialProductState = { label: "", description: "", price: "" };
@@ -22,7 +22,7 @@ const CreateProduct = () => {
         event.preventDefault();
         try {
             // Envoyer une requête POST pour ajouter le nouveau produit
-            await axios.post('http://localhost:9090/MyWebApi/rest/products', productData);
+            await axios.post(`http://localhost:${port}/MyWebApi/rest/products`, productData);
             console.log("Produit ajouté avec succès");
             // Réinitialiser l'état du formulaire
             setProductData(initialProductState);

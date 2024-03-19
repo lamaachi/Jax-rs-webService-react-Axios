@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import {port} from "../Variables/localhost";
 
 const UpdateProduct = () => {
     // Déclaration des états
@@ -17,7 +18,7 @@ const UpdateProduct = () => {
 
     // Effet pour charger les données du produit à mettre à jour
     useEffect(() => {
-        axios.get(`http://localhost:9090/MyWebApi/rest/products/${id}`)
+        axios.get(`http://localhost:${port}/MyWebApi/rest/products/${id}`)
             .then((res) => {
                 // Remplacement des valeurs null par des chaînes vides
                 const data = res.data;
@@ -39,7 +40,7 @@ const UpdateProduct = () => {
     // Fonction pour soumettre les données mises à jour
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.put(`http://localhost:9090/MyWebApi/rest/products/${id}`, productData)
+        axios.put(`http://localhost:${port}/MyWebApi/rest/products/${id}`, productData)
             .then(() => {
                 setField(true); // Mise à jour du champ pour indiquer que la mise à jour est effectuée
                 redirect('/showproduct'); // Redirection vers la page d'affichage des produits

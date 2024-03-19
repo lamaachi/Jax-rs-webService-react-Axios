@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import {port} from "../Variables/localhost";
 const ShowProduct = () => {
     // Définir l'état initial pour les produits
     const [products, setProducts] = useState([]);
 
     // Fonction pour récupérer les données des produits depuis le serveur
     const getProductData = () => {
-        axios.get('http://localhost:9090/MyWebApi/rest/products')
+        axios.get(`http://localhost:${port}/MyWebApi/rest/products`)
             .then(res => setProducts(res.data))
             .catch(error => console.error("Erreur lors de la récupération des produits :", error));
     }
@@ -20,7 +20,7 @@ const ShowProduct = () => {
 
     // Fonction pour supprimer un produit
     const handleDelete = (id) => {
-        axios.delete(`http://localhost:9090/MyWebApi/rest/products/${id}`)
+        axios.delete(`http://localhost:${port}/MyWebApi/rest/products/${id}`)
             .then(() => {
                 getProductData(); // Rafraîchir la liste des produits après la suppression
             })
